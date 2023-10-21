@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="title">Title</string>
+    <string name="description">Displays text and follows the recommended Material Design guidelines.</string>
+</resources>
