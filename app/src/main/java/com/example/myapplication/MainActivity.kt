@@ -1,12 +1,18 @@
 package com.example.myapplication
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -19,8 +25,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -68,9 +75,15 @@ fun ClickBehavior(){
                 .background(MaterialTheme.colorScheme.onPrimaryContainer)
         ) {
             when(current){
-                1-> TextAndImages(textLabel = , image = , onClick = { /*TODO*/ })
-                2-> TextAndImages(textLabel = , image = , onClick = { /*TODO*/ })
-                3-> TextAndImages(textLabel = , image = , onClick = { /*TODO*/ })
+                1-> TextAndImages(
+                    textLabel = stringResource(R.string.tap),
+                    image = R.drawable.lemon_drink,
+                    onClick = {
+                    current = 2
+                    squeze=(2..4).random()
+                }
+                )
+
             }
         }
     }
@@ -81,12 +94,25 @@ fun ClickBehavior(){
 @Composable
 fun TextAndImages(
     textLabel:String,
-    image: Painter,
+    image: Int,
     onClick: ()-> Unit,
     modifier: Modifier = Modifier
 ){
     Box(modifier = modifier){
-
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Button(
+                onClick = onClick,
+                shape = RoundedCornerShape(dimensionResource(androidx.core.R.dimen.compat_button_inset_vertical_material))
+                ) {
+                Text(text = textLabel)
+                Image(painter = painterResource(image),
+                    contentDescription = null)
+            }
+        }
     }
 
 
