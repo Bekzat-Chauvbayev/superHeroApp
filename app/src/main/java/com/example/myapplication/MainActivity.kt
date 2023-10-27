@@ -77,13 +77,35 @@ fun ClickBehavior(){
             when(current){
                 1-> TextAndImages(
                     textLabel = stringResource(R.string.tap),
-                    image = R.drawable.lemon_drink,
+                    image = R.drawable.lemon_tree,
                     onClick = {
                     current = 2
                     squeze=(2..4).random()
                 }
                 )
+                2-> TextAndImages(
+                    textLabel = stringResource(R.string.keeptaping),
+                    image = R.drawable.lemon_squeeze,
+                    onClick = {
+                        squeze--
+                        if(squeze==0) current= 3
+                    }
+                )
+                3-> TextAndImages(
+                    textLabel = stringResource(R.string.drink),
+                    image = R.drawable.lemon_drink,
+                    onClick = {
+                        current = 4
+                    }
+                )
+                4-> TextAndImages(
+                    textLabel = stringResource(R.string.empty),
+                    image = R.drawable.lemon_restart,
+                    onClick = {
+                        current = 1
 
+                    }
+                )
             }
         }
     }
