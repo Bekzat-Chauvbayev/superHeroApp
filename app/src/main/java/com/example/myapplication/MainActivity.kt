@@ -9,8 +9,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -32,10 +35,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.myapplication.data.DataSource
 import com.example.myapplication.model.Topic
 import com.example.myapplication.ui.theme.ClickBehaviorTheme
@@ -141,9 +146,31 @@ fun topicApp(
 ){
     Card(modifier = modifier) {
         Column {
-            Image(painter = painterResource(id = topic.imageofTopic), contentDescription = null)
-            Text(text = stringResource(id = topic.name))
-            Text(text = stringResource(id = topic.courses))
+            Row {
+                Column {
+                    Image(painter = painterResource(id = topic.imageofTopic), contentDescription = null,  modifier = modifier
+                        .size(width = 68.dp, height = 68.dp)
+                        .aspectRatio(1f),
+                        contentScale = ContentScale.Crop)
+
+                }
+                Column {
+                    Text(text = stringResource(id = topic.name),style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.padding(
+                            start = dimensionResource(R.dimen.padding_medium),
+                            top = dimensionResource(R.dimen.padding_medium),
+                            end = dimensionResource(R.dimen.padding_medium),
+                            bottom = dimensionResource(R.dimen.padding_small)))
+                    Text(
+                        text = topic.courses.toString(),
+                        modifier = Modifier.padding(
+                            start = dimensionResource(R.dimen.padding_medium),
+                            top = dimensionResource(R.dimen.padding_small)
+                     ))
+                }
+
+            }
+
 
         }
     }
@@ -186,11 +213,19 @@ fun TextAndImages(
 
 @Preview(showBackground = true)
 @Composable
-fun topicPreview() {
-    ClickBehaviorTheme(){
-        TopicGrid()
+fun TopicPreview() {
+    ClickBehaviorTheme {
+        val topic = Topic(R.string.photography, 321, R.drawable.lemon_drink)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            topicApp(topic = topic)
+        }
     }
-
-
-
 }
+
+
+
+
