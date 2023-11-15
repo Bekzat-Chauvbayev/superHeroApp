@@ -16,6 +16,7 @@
 package com.example.myapplication.data
 
 import com.example.myapplication.R
+import com.example.myapplication.model.Hero
 import com.example.myapplication.model.Topic
 
 object DataSource {
@@ -34,5 +35,40 @@ object DataSource {
         Topic(R.string.painting, 172, R.drawable.lemon_drink),
         Topic(R.string.photography, 321, R.drawable.lemon_drink),
         Topic(R.string.tech, 118, R.drawable.lemon_drink)
+    )
+}
+
+object HeroesRepository {
+    val heroes = listOf(
+        Hero(
+            nameRes = R.string.hero1,
+            descriptionRes = R.string.description1,
+            imageRes = R.drawable.android_superhero1
+        ),
+        Hero(
+            nameRes = R.string.hero2,
+            descriptionRes = R.string.description2,
+            imageRes = R.drawable.android_superhero2
+        ),
+        Hero(
+            nameRes = R.string.hero3,
+            descriptionRes = R.string.description3,
+            imageRes = R.drawable.android_superhero3
+        ),
+        Hero(
+            nameRes = R.string.hero4,
+            descriptionRes = R.string.description4,
+            imageRes = R.drawable.android_superhero4
+        ),
+        Hero(
+            nameRes = R.string.hero5,
+            descriptionRes = R.string.description5,
+            imageRes = R.drawable.android_superhero5
+        ),
+        Hero(
+            nameRes = R.string.hero6,
+            descriptionRes = R.string.description6,
+            imageRes = R.drawable.android_superhero6
+        )
     )
 }
