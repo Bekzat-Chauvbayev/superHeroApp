@@ -11,8 +11,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -25,12 +29,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.myapplication.data.DataSource
+import com.example.myapplication.model.Topic
 import com.example.myapplication.ui.theme.ClickBehaviorTheme
 
 
@@ -40,7 +47,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ClickBehaviorTheme {
                 // A surface container using the 'background' color from the theme
-                ClickBehavior()
+                TopicGrid()
 
 
             }
@@ -112,6 +119,37 @@ fun ClickBehavior(){
 
 
 }
+@Composable
+fun TopicGrid(modifier: Modifier = Modifier) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(androidx.core.R.dimen.compat_button_padding_vertical_material)),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(androidx.core.R.dimen.notification_small_icon_background_padding)),
+        modifier = modifier
+    ) {
+        items(DataSource.topics) { topic ->
+            topicApp(topic)
+        }
+    }
+}
+
+@Composable
+fun topicApp(
+    topic: Topic,
+
+    modifier: Modifier = Modifier
+){
+    Card(modifier = modifier) {
+        Column {
+            Image(painter = painterResource(id = topic.imageofTopic), contentDescription = null)
+            Text(text = stringResource(id = topic.name))
+            Text(text = stringResource(id = topic.courses))
+
+        }
+    }
+}
+
+
 
 @Composable
 fun TextAndImages(
@@ -145,11 +183,12 @@ fun TextAndImages(
 
 
 
+
 @Preview(showBackground = true)
 @Composable
-fun ClickBehaviorPreview() {
+fun topicPreview() {
     ClickBehaviorTheme(){
-        ClickBehavior()
+        TopicGrid()
     }
 
 
