@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Superheroes</string>
     <string name="title">Title</string>
     <string name="tap">Tap the lemon tree to select a lemon</string>
     <string name="keeptaping">Keep tapping the lemon to squeeze it</string>
@@ -19,7 +19,7 @@
     <string name="painting">Painting</string>
     <string name="photography">Photography</string>
     <string name="tech">Tech</string>
-    <string name="app_name">Superheroes</string>
+
     <string name="hero1">Nick the Night and Day</string>
     <string name="description1">The Jetpack Hero</string>
     <string name="hero2">Reality Protector</string>

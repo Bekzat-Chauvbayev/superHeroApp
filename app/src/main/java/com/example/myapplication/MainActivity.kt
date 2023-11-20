@@ -42,23 +42,41 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.data.DataSource
+import com.example.myapplication.data.HeroesRepository
 import com.example.myapplication.model.Topic
-import com.example.myapplication.ui.theme.ClickBehaviorTheme
+import com.example.myapplication.ui.theme.SuperheroesTheme
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ClickBehaviorTheme {
+            SuperheroesTheme {
                 // A surface container using the 'background' color from the theme
-                TopicGrid()
+                SuperHeroesApp()
 
 
             }
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SuperHeroesApp(){
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            CenterAlignedTopAppBar(title = { Text(text = stringResource(R.string.app_name), style = MaterialTheme.typography.displaySmall) })
+
+        }
+    ) {
+        val heroes = HeroesRepository.heroes
+        HeroesList(heroes = heroes, contentPadding = it)
+    }
+}
+
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ClickBehavior(){
@@ -214,7 +232,7 @@ fun TextAndImages(
 @Preview(showBackground = true)
 @Composable
 fun TopicPreview() {
-    ClickBehaviorTheme {
+    SuperheroesTheme {
         val topic = Topic(R.string.photography, 321, R.drawable.lemon_drink)
         Column(
             modifier = Modifier.fillMaxSize(),
